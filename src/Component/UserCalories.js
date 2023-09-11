@@ -7,7 +7,7 @@ export const UserCalories = () => {
   return (
     <View style={styles.calories}>
     <Icon name="stats-chart-outline" style={styles.menuIcon} size={80} color="#ff8b3d" />
-    <View>
+    <View style={styles.container}>
     <View style={styles.caloriesInfo}>
       <Text style={styles.caloriesHeading}>Calories Required</Text>
       <Text style={styles.caloriesQty}> 2500</Text>
@@ -28,26 +28,35 @@ export const UserCalories = () => {
 
 const styles=StyleSheet.create({
     calories: {
-        padding: 10,
+        // paddingVertical: 1,
+        paddingHorizonta:15,
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: "white",
         cursor: "pointer",
-        // borderColor:"#ff8b3d",
-        // borderWidth:1,
-        margin: 15,
-        marginTop: 20,
+        margin: 10,
+        marginHorizontal: 15,
         borderRadius: 3,
         elevation: 5,
-        // shadowColor: '#52006A',
+        
+      },
+      container:{
+        justifyContent: "center",
+
       },
       caloriesInfo: {
         padding: 5,
         flexDirection: "row",
-        justifyContent: "space-between",
+        alignItems:'space-between',
+        color:'#ff8b3d'
+      },
+      caloriesHeading:{
+        color:'#ff8b3d'
+
       },
       caloriesQty: {
         paddingLeft: 10,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color:'#ff8b3d'
       },
 })

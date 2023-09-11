@@ -82,6 +82,7 @@ export default function Register({ navigation }) {
             : <Text style={styles.btntext}>SIGN UP</Text>}
         </TouchableOpacity>
         <TouchableOpacity 
+        activeOpacity={0.5}
           onPress={() => navigation.navigate("Login")}
           >
             <Text
@@ -168,8 +169,8 @@ const styles = StyleSheet.create({
     color:'#8e8e8e'
   },
   Btn: {
-    color: '#ff8b3d',
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ff8b3d',
+    color: "#ffffff",
     width:windowWidth*0.8,
     padding: 15,
     borderRadius:10,
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
 
   },
   btntext: {
-    color: '#ff8b3d',
+    color: '#ffffff',
     fontSize: 20,
     fontWeight:'bold',
     textAlign: 'center',

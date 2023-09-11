@@ -70,7 +70,7 @@ export const HomeModal = ({open,setOpen}) => {
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://0ab3-2603-300a-21e3-0-d131-6e3f-46f3-578f.ngrok-free.app/api/model',
+        url: 'https://6df1-2603-300a-21e3-0-d131-6e3f-46f3-578f.ngrok-free.app/api/model',
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -82,6 +82,7 @@ export const HomeModal = ({open,setOpen}) => {
         setData(response.data?.data)
         console.log(response.data?.data?.calorie);
         console.log(response.data?.data?.itemName);
+        alert(response.data?.data?.calorie )
       })
       .catch((error) => {
         console.log(error);
@@ -94,8 +95,8 @@ export const HomeModal = ({open,setOpen}) => {
 console.log(data)
   return (
     <Modal isVisible={open} onBackdropPress={()=>{setOpen(false)}} 
-    // onSwipeComplete={() => setOpen(false)}
-    // swipeDirection="top"
+    //  onSwipeComplete={() => setOpen(false)}
+    //  swipeDirection="top"
     style={styles.modelStyle}
     >
       <View style={styles.modelContainer}>

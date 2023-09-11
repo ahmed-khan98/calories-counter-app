@@ -15,24 +15,13 @@ export default function Banner() {
 const styles = StyleSheet.create({
 
   container: {
-    padding:15,
+    paddingHorizontal:15,
+    paddingVertical:0,
     width:windowWidth,
-    elevation:30,
+    // elevation:30,
   },
   img: {
     borderRadius:7,
     height: 180,
   },
-  name: {
-    padding: 1,
-    fontSize: 18,
-    alignSelf:'center',
-    color:'black',
-    // paddingTop:10,
-    fontWeight: 'bold',
-  },
-  addIcon:{
-    alignSelf:'center',
-    justifyContent:'center'
-  }
 });

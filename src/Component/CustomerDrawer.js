@@ -45,8 +45,8 @@ import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
               >
                 <Image source={{ uri: 'https://avatars.githubusercontent.com/u/11738465?v=4' }}
                   style={{
-                    height: 100,
-                    width: 100,
+                    height: 80,
+                    width: 80,
                     borderRadius: 50,
                     marginBottom: 10,
                     borderWidth: 2,
@@ -154,8 +154,8 @@ import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
           >
             <Icon name="settings-outline" size={24} color="#ff8b3d" />
           </View>
-          <View>
-            <Text>Setting</Text>
+          <View style={{color:"#555"}}>
+            <Text style={{color:"grey",fontWeight:500,fontSize:14}}>Setting</Text>
           </View>
         </View>
   
@@ -174,8 +174,8 @@ import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
           >
             <MaterialIcons name="privacy-tip" size={24} color="#ff8b3d" />
           </View>
-          <View>
-            <Text>Terms & Conditions / Privacy</Text>
+          <View >
+            <Text style={{color:"grey",fontWeight:500,fontSize:14}}>Terms & Conditions / Privacy</Text>
           </View>
         </View>
   
@@ -195,8 +195,8 @@ import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
             <SimpleLineIcons name="logout" size={24} color="#ff8b3d" />
           </View>
           <View>
-            <TouchableOpacity onPress={()=>{props.navigation.navigate('Login')}}>
-              <Text>Log out</Text>
+            <TouchableOpacity onPress={()=>{props.navigation.navigate('Login')}} >
+              <Text style={{color:"grey",fontWeight:500,fontSize:14}}>Log out</Text>
             </TouchableOpacity>
           </View>
         </View>

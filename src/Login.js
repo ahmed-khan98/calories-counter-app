@@ -65,14 +65,11 @@ console.log(navigation)
           onChangeText={(e) => createUser(e, "password")}
         />
 
-        <TouchableOpacity style={styles.Btn} 
+        <TouchableOpacity style={styles.Btn} activeOpacity={0.5}
         onPress={SignIn}>
             <Text style={styles.btntext}>LOG IN</Text>
         </TouchableOpacity>
-       {loading && <Image style={{ width: 300, height: 300 }}
-       source={{
-         uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEuoluMgG30jFV0o_AA_twKbAl167K1PhdmQ&usqp=CAU'
-       }} />}
+     
         <View style={styles.auth}>
         <TouchableOpacity 
         //  onPress={() => navigation.navigate("Signup")}
@@ -103,7 +100,6 @@ const styles = StyleSheet.create({
   },
   container: {
     width:windowWidth,
-    // height:windowHeight,
     flex: 1,
     backgroundColor: '#ffffff',
     justifyContent:'center',

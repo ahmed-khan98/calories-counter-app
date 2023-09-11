@@ -44,13 +44,13 @@ export default function Dishes(){
 const styles = StyleSheet.create({
     breakfastList: {
         width: windowWidth,
-        paddingHorizontal:10,
+        marginHorizontal:15,
       },
       routineName:{
         color:'#000',
         fontWeight: 'bold',
         fontSize:18,
-        marginHorizontal:10,
+        marginHorizontal:5,
         marginVertical:5,
     
       },

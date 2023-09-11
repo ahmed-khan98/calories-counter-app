@@ -4,21 +4,22 @@ const windowWidth = Dimensions.get('window').width;
 
 export default function Dish() {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity activeOpacity={0.5}>
             <View style={styles.container}>
-                <Text>Dishes</Text>
+                <Text style={{color:'red',padding:8}}>Dishessdsdvvsdvsvdvsv </Text>
             </View>
         </TouchableOpacity>
     )
 }
 const styles = StyleSheet.create({
     container:{
-        width:windowWidth*0.26,
+        width:windowWidth*0.28,
         height:120,
         backgroundColor:'#fff',
-        borderRadius:15,
-        padding:10,
-        elevation:1,
-        margin:5,
+        borderRadius:12,
+        // padding:10,
+        elevation:2,
+        marginBottom:4,
+        marginRight:7,
     }
 })

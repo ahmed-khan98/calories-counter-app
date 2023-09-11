@@ -6,7 +6,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 export default function Foodtime({ name, img, navigation,handleOpen }) {
 
   return (
-    <TouchableOpacity onPress={()=>{handleOpen()}} >
+    <TouchableOpacity onPress={()=>{handleOpen()}}  activeOpacity={0.5}>
       <View style={styles.container}>
         <View style={styles.body}>
           <Image
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     width: 60,
     height: 60,
+
   },
   name: {
     padding: 1,

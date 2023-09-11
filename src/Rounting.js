@@ -25,8 +25,7 @@ export default function Rounting() {
 
 function MyStack() {
   return (
-    <Stack.Navigator initialRouteName='Home'>
-    
+    <Stack.Navigator initialRouteName='Registration'>
       <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
       <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
       <Stack.Screen name="Login" component={SignIn} options={{ headerShown: false }}/>
