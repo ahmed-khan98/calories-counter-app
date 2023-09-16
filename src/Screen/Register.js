@@ -114,7 +114,7 @@ export function InputField({ keyboardType, placeholder, placeholderTextColor, on
 const styles = StyleSheet.create({
   loading: {
     flex: 1,
-    backgroundColor: '#ffff',
+    backgroundColor: '#fafafa',
     alignItems: "center",
     justifyContent: "center",
   },
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
      width:windowWidth,
     height:windowHeight,
     flex: 1,
-    backgroundColor: '#ff8b3d',
+    backgroundColor: "#01714b",
     display:'flex',
     alignItems:'center',
     // justifyContent:'center'
@@ -133,14 +133,14 @@ const styles = StyleSheet.create({
   },
   bottom:{
     flex:2,
-    backgroundColor:'#ffffff',
+    backgroundColor:'#fafafa',
     width:windowWidth,
     justifyContent:'center',
     alignItems:'center',
     elevation:20,
     // shadowColor:'red',.
-    borderTopLeftRadius: 85,
-    borderTopRightRadius: 85,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
   },
   Logo: {
     marginTop: 50,
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     height: 130,
   },
   heading: {
-    color: "#ffffff",
+    color: "#fafafa",
     fontSize: 48,
     fontWeight:'bold',
     // alignItems:'center',
@@ -163,14 +163,14 @@ const styles = StyleSheet.create({
     marginBottom:10,
     paddingLeft:15,
     borderRadius:10,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#e6f1ed',
     // borderWidth: 1,
     // borderColor:'#8e8e8e',
     color:'#8e8e8e'
   },
   Btn: {
-    backgroundColor: '#ff8b3d',
-    color: "#ffffff",
+    backgroundColor: '#01714b',
+    color: "#fafaf",
     width:windowWidth*0.8,
     padding: 15,
     borderRadius:10,
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
 
   },
   btntext: {
-    color: '#ffffff',
+    color: '#fafafa',
     fontSize: 20,
     fontWeight:'bold',
     textAlign: 'center',

@@ -1,14 +1,14 @@
 import * as React from "react";
 import 'react-native-gesture-handler';
-import Register from "./Register";
-import SignIn from "./Login";
-import Home from "./Home";
-import Registration from "./Registration";
-import CameraScreen from './Camera'
-// import Profile from "./screen/Profile";
-import CustomDrawer from "./Component/CustomerDrawer";
+import Register from "../Screen/Register";
+import SignIn from "../Screen/Login";
+import Home from "../Screen/Home";
+import Registration from "../Screen/Registration";
+import CameraScreen from '../Screen/Camera'
+import CustomDrawer from "../Component/CustomerDrawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import Feedback from "../Screen/Feedback";
 // import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Stack = createStackNavigator();
@@ -25,11 +25,10 @@ export default function Rounting() {
 
 function MyStack() {
   return (
-    <Stack.Navigator initialRouteName='Registration'>
+    <Stack.Navigator initialRouteName='Home'>
       <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
       <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
       <Stack.Screen name="Login" component={SignIn} options={{ headerShown: false }}/>
-      {/* <Stack.Screen name="Profile" component={Profile} /> */}
       <Stack.Screen name="Registration" component={Registration} options={{ headerShown: false }} />
       {/* <Stack.Screen name="Camera" component={CustomCamera} options={{ headerShown: false }} /> */}
 
@@ -56,55 +55,27 @@ function MyDrawer() {
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawer {...props} />}
       screenOptions={{
-        drawerActiveBackgroundColor: "#ff8b3d",
+        drawerActiveBackgroundColor: "#01714b",
         drawerActiveTintColor: "#fff",
-        drawerInactiveTintColor: "#ff8b3d",
+        drawerInactiveTintColor: "#01714b",
       }}
     >
 
-      <Drawer.Screen name="Home1" component={MyStack}
+      <Drawer.Screen name="Home" component={MyStack}
         options={{
           headerShown: false ,
           headerTitleStyle: {
             color: '#fff',
           },
           headerStyle: {
-            backgroundColor: "#ff8b3d",
+            backgroundColor: "#01714b",
           },
         }}
         screenOptions={{
           overlayColor: 'transparent',
         }}
       />
-      {/* <Drawer.Screen name="Profile" component={Profile}
-        options={{
-         
-          headerTitleStyle: {
-            color: '#fff',
-          },
-          headerStyle: {
-            backgroundColor: "#ff8b3d",
-          },
-        }}
-        screenOptions={{
-          overlayColor: 'transparent',
-        }}
-      /> */}
 
-      {/* <Drawer.Screen name="Profile" component={Registration}
-        options={{
-          headerShown: false ,
-          headerTitleStyle: {
-            color: '#fff',
-          },
-          headerStyle: {
-            backgroundColor: "#ff8b3d",
-          },
-        }}
-        screenOptions={{
-           overlayColor: 'transparent',
-        }}
-      /> */}
       <Drawer.Screen name="History Diet" component={CameraScreen}
         options={{
           headerShown: false ,
@@ -112,14 +83,42 @@ function MyDrawer() {
             color: '#fff',
           },
           headerStyle: {
-            backgroundColor: "#ff8b3d",
+            backgroundColor: "#01714b",
           },
         }}
         screenOptions={{
            overlayColor: 'transparent',
         }}
       />
+      <Drawer.Screen name="Feedback" component={Feedback}
+        options={{
+          headerShown: false ,
+          headerTitleStyle: {
+            color: '#fff',
+          },
+          headerStyle: {
+            backgroundColor: "#01714b",
+          },
+        }}
+        screenOptions={{
+          overlayColor: 'transparent',
+        }}
+      /> 
 
+        {/* <Drawer.Screen name="Profile" component={Registration}
+        options={{
+          headerShown: false ,
+          headerTitleStyle: {
+            color: '#fff',
+          },
+          headerStyle: {
+            backgroundColor: "#01714b",
+          },
+        }}
+        screenOptions={{
+           overlayColor: 'transparent',
+        }}
+      /> */}
 
     </Drawer.Navigator>
 

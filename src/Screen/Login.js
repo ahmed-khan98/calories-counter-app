@@ -101,12 +101,13 @@ const styles = StyleSheet.create({
   container: {
     width:windowWidth,
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fafafa',
     justifyContent:'center',
     alignItems:'center',
   },
   heading: {
-    color: "#ff8b3d",
+    // color: "#ff8b3d",
+    color: "#01714b",
     fontSize: 46,
     fontWeight:'bold',
     marginBottom:40,
@@ -119,8 +120,8 @@ const styles = StyleSheet.create({
     height: 200,
   },
   Btn: {
-    color: '#ffffff',
-    backgroundColor: "#ff8b3d",
+    color: '#fafafa',
+    backgroundColor: "#01714b",
     width:windowWidth*0.8,
     padding: 12,
     borderTopLeftRadius: 15,
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
 
   },
   btntext: {
-    color: '#ffffff',
+    color: '#fafafa',
     fontSize: 20,
     fontWeight:'bold',
     textAlign: 'center',
@@ -153,7 +154,7 @@ const styles = StyleSheet.create({
     fontWeight:"bold", 
   },
   signup:{
-    color: "#ff8b3d",
+    color: "#01714b",
     // marginTop: 35,
     // marginBottom: 10,
     // alignSelf:'center',

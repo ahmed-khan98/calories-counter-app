@@ -149,7 +149,7 @@ const styles=StyleSheet.create({
       modalbtn: {
         width: windowWidth*0.8,
         padding: 15,
-        backgroundColor: '#ff8b3d',
+        backgroundColor: '#01714b',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 6,

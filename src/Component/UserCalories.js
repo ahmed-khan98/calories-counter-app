@@ -6,7 +6,7 @@ const windowWidth = Dimensions.get('window').width;
 export const UserCalories = () => {
   return (
     <View style={styles.calories}>
-    <Icon name="stats-chart-outline" style={styles.menuIcon} size={80} color="#ff8b3d" />
+    <Icon name="stats-chart-outline" style={styles.menuIcon} size={80} color="#01714b" />
     <View style={styles.container}>
     <View style={styles.caloriesInfo}>
       <Text style={styles.caloriesHeading}>Calories Required</Text>
@@ -48,15 +48,15 @@ const styles=StyleSheet.create({
         padding: 5,
         flexDirection: "row",
         alignItems:'space-between',
-        color:'#ff8b3d'
+        color:'#01714b'
       },
       caloriesHeading:{
-        color:'#ff8b3d'
+        color:'#01714b'
 
       },
       caloriesQty: {
         paddingLeft: 10,
         fontWeight: 'bold',
-        color:'#ff8b3d'
+        color:'#01714b'
       },
 })

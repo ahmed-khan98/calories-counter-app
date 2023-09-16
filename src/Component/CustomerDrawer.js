@@ -19,7 +19,7 @@ import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
       <View style={styles.container}>
         <DrawerContentScrollView
           {...props}
-          contentContainerStyle={{ backgroundColor: "#ff8b3d" }}
+          contentContainerStyle={{ backgroundColor: "#01714b" }}
         >
           <View
             style={{
@@ -152,7 +152,7 @@ import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
               marginRight: 12,
             }}
           >
-            <Icon name="settings-outline" size={24} color="#ff8b3d" />
+            <Icon name="settings-outline" size={24} color="#01714b" />
           </View>
           <View style={{color:"#555"}}>
             <Text style={{color:"grey",fontWeight:500,fontSize:14}}>Setting</Text>
@@ -172,7 +172,7 @@ import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
               marginRight: 12,
             }}
           >
-            <MaterialIcons name="privacy-tip" size={24} color="#ff8b3d" />
+            <MaterialIcons name="privacy-tip" size={24} color="#01714b" />
           </View>
           <View >
             <Text style={{color:"grey",fontWeight:500,fontSize:14}}>Terms & Conditions / Privacy</Text>
@@ -192,7 +192,7 @@ import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
               marginRight: 12,
             }}
           >
-            <SimpleLineIcons name="logout" size={24} color="#ff8b3d" />
+            <SimpleLineIcons name="logout" size={24} color="#01714b" />
           </View>
           <View>
             <TouchableOpacity onPress={()=>{props.navigation.navigate('Login')}} >

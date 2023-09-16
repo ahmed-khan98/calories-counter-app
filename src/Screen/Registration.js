@@ -68,6 +68,7 @@ export default function Registration({ navigation }) {
     const adjustedDailyCalories = dailyCalories + Math.round(totalGoalCalories / (months * 30));
   
     alert(adjustedDailyCalories);
+    navigation.navigate('Home');
   
   }
   
@@ -84,8 +85,8 @@ export default function Registration({ navigation }) {
       setValue={(e)=>setActivity(e)}
       placeholder="Select Your Activity Level"
       disableBorderRadius={false}
-      style={{ borderColor: '#ff8b3d' }}
-      placeholderStyle={{color:'#ff8b3d',fontWeight:'bold'}}
+      style={{ borderColor: '#01714b' }}
+      placeholderStyle={{color:'#01714b',fontWeight:'bold'}}
       containerStyle={{ width: windowWidth * 0.8,marginBottom:7 }}
       zIndex={5000}
       />
@@ -97,8 +98,8 @@ export default function Registration({ navigation }) {
       setValue={(e)=>setGender(e)}
       placeholder="Select Your Gender"
       disableBorderRadius={false}
-      style={{ borderColor: '#ff8b3d' }}
-      placeholderStyle={{color:'#ff8b3d',fontWeight:'bold'}}
+      style={{ borderColor: '#01714b' }}
+      placeholderStyle={{color:'#01714b',fontWeight:'bold'}}
       containerStyle={{ width: windowWidth * 0.8,marginBottom:7 }}
       zIndex={4000}
       />
@@ -110,8 +111,8 @@ export default function Registration({ navigation }) {
       setValue={(e)=>setGoal(e)}
       placeholder="Select Your Goal"
       disableBorderRadius={false}
-      style={{ borderColor: '#ff8b3d' }}
-      placeholderStyle={{color:'#ff8b3d',fontWeight:'bold'}}
+      style={{ borderColor: '#01714b' }}
+      placeholderStyle={{color:'#01714b',fontWeight:'bold'}}
       containerStyle={{ width: windowWidth * 0.8,marginBottom:7 }}
       zIndex={3000}
       />
@@ -198,7 +199,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     textAlign: "center",
     fontWeight: "bold",
-    color: "#ff8b3d",
+    color: "#01714b",
   },
   inputContainer:{
     marginBottom:7,
@@ -207,11 +208,11 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingBottom: 5,
     fontSize:12,
-    color:'#ff8b3d'
+    color:'#01714b'
   },
   Btn: {
     color: '#ffffff',
-    backgroundColor: "#ff8b3d",
+    backgroundColor: "#01714b",
     width:windowWidth*0.8,
     padding: 12,
     borderTopLeftRadius: 15,

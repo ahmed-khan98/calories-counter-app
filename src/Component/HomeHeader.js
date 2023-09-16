@@ -1,35 +1,32 @@
 import * as React from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 
-export default function HomeHeader({ navigation }) {
+export default function HomeHeader({ navigation,name,icon }) {
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                     <TouchableOpacity onPress={() => navigation.openDrawer()}>
-                        <Icon name="menu-sharp" style={styles.menuIcon} size={26} color="#fff" />
-                    </TouchableOpacity>
-                    <Text style={styles.name}>Home</Text>
+                        {icon}   
+                </TouchableOpacity>
+                    <Text style={styles.name}>{name}</Text>
                 </View>
-
-               
             </View>
         </View>
     );
 }
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#ff8b3d",
+        backgroundColor: "#01714b",
         // flex: 1,
         paddingBottom: 5,
     },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        backgroundColor: "#ff8b3d",
+        backgroundColor: "#01714b",
         paddingTop: 5,
         paddingBottom:5,
         marginTop: 10,

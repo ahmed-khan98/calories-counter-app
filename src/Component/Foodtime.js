@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 
   body: {
     padding: 8,
-    backgroundColor: "#ff8b3d",
+    backgroundColor: "#01714b",
     cursor: "pointer",
     flexDirection: "row",
     borderRadius: 10,
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     marginHorizontal:15,
     marginVertical:5,
     height: 75,
-    elevation: 3,
+    elevation:2,
   },
   img: {
     borderRadius: 3,
