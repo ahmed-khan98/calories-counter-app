@@ -3,21 +3,20 @@ import Modal from "react-native-modal";
 import Feather from "react-native-vector-icons/Feather";
 import Fontisto from "react-native-vector-icons/Fontisto";
 import { StyleSheet, Dimensions, View, Text, Image, TouchableOpacity } from "react-native";
-import { HomeModal } from "./HomeModal";
 
 const windowWidth = Dimensions.get('window').width;
 
 export default function Dish({ name, calories, quantity, image }) {
     const [open, setOpen] = useState(false)
     const [data, setData] = useState(false)
-    const handleSubmit=(e)=>{
-    console.log(e)
+    const handleSubmit = (e) => {
+        console.log(e)
         setData(e)
         setOpen(true)
     }
     return (
         <>
-            <TouchableOpacity activeOpacity={0.5} onPress={() =>handleSubmit({name,calories,image})}>
+            <TouchableOpacity activeOpacity={0.5} onPress={() => handleSubmit({ name, calories, image })}>
                 <View style={styles.container}>
                     <Image
                         style={styles.img}
@@ -30,33 +29,36 @@ export default function Dish({ name, calories, quantity, image }) {
                 </View>
             </TouchableOpacity>
             <Modal isVisible={open} onBackdropPress={() => { setOpen(false) }} style={styles.modelStyle}>
-            <View style={styles.modelContainer}>
-          
-                  <View>
-                  <Image
-                  source={{
-                    uri:data?.image
-                  }}
-                  style={{ width: 120, height: 120,borderRadius:8}}
-                />
-                 <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                 <Text style={styles.itemKey}>Name</Text>
-                 <Text style={styles.itemName}>{data?.name}</Text>
-                 </View>
-                 <View style={{flexDirection:'row',justifyContent:'space-arouund'}}>
-                 <Text style={styles.itemKey}>Calories</Text>
-                 <Text style={styles.itemName}>{data?.calories}</Text>
-                 </View>
-                  </View>
-                  <View style={{flexDirection:'row',justifyContent:'space-around',marginBottom:20}}>
-                       <TouchableOpacity style={styles.cancelbtn} onPress={()=>{setOpen(false)}}>
-                       <Text style={styles.cancelbtnText}>Cancel</Text>
-                   </TouchableOpacity>
-                   <TouchableOpacity style={styles.addbtn}>
-                       <Text style={styles.addbtnText}>Add To Diet</Text>
-                   </TouchableOpacity>
-                  </View>
-            </View>
+                <View style={styles.modelContainer}>
+
+                    <View style={{ alignItems: 'center' }}>
+                        <Image
+                            source={{
+                                uri: data?.image
+                            }}
+                            style={{ width: 100, height: 100, borderRadius: 8 }}
+                        />
+                    </View>
+                    <View style={{ marginLeft: 30, marginRight: 30 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text style={styles.itemKey}>Name</Text>
+                            <Text style={styles.itemName}>{data?.name}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text style={styles.itemKey}>Calories</Text>
+                            <Text style={styles.itemName}>{data?.calories}</Text>
+                        </View>
+                    </View>
+
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 20 }}>
+                        <TouchableOpacity style={styles.cancelbtn} onPress={() => { setOpen(false) }}>
+                            <Text style={styles.cancelbtnText}>Cancel</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.addbtn}>
+                            <Text style={styles.addbtnText}>Add To Diet</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
             </Modal>
         </>
     )
@@ -105,20 +107,20 @@ const styles = StyleSheet.create({
     modelContainer: {
         backgroundColor: '#fff',
         height: 290,
-        borderRadius:20,
+        borderRadius: 20,
         justifyContent: 'space-around',
-        alignItems:'center'
+        // alignItems:'center'
     },
     addbtn: {
         paddingHorizontal: 20,
-        padding:10,
-        marginHorizontal:10,
+        padding: 10,
+        marginHorizontal: 10,
         backgroundColor: '#01714b',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 6,
         marginTop: 10,
-        elevation:5,
+        elevation: 5,
     },
     addbtnText: {
         textAlign: 'center',
@@ -126,16 +128,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#fff',
     },
-     cancelbtn: {
+    cancelbtn: {
         padding: 10,
-        paddingHorizontal:20,
-        marginHorizontal:10,
+        paddingHorizontal: 20,
+        marginHorizontal: 10,
         backgroundColor: '#e6f1ed',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 6,
         marginTop: 10,
-        elevation:3,
+        elevation: 3,
     },
     cancelbtnText: {
         textAlign: 'center',
@@ -143,16 +145,15 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#01714b',
     },
-    itemKey:{
-        marginRight:20,
-        marginTop:5,
-        color:'grey',
-        fontWeight:'bold',
-        paddingBottom:10,
+    itemKey: {
+        marginTop: 1,
+        color: 'grey',
+        fontWeight: 'bold',
+        paddingBottom: 10,
     },
-    itemName:{
-        marginTop:5,
-        color:'#01714b',
-        fontWeight:'bold'
+    itemName: {
+        marginTop: 1,
+        color: '#01714b',
+        fontWeight: 'bold'
     }
 })

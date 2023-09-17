@@ -12,6 +12,8 @@ const windowWidth = Dimensions.get('window').width;
 export const HomeModal = ({open,setOpen}) => {
   const [photo,setPhoto]=useState()
   const [data,setData]=useState()
+  const [open1,setOpen2]=useState(false)
+
 
   const options={
     saveToPhotos:true,
@@ -47,6 +49,8 @@ export const HomeModal = ({open,setOpen}) => {
 
   const uploadImage=async()=>{
     console.log('chala--->>>>');
+   
+
     const reference = storage().ref(photo.fileName);
     const pathToFile = photo.uri;
     
@@ -70,7 +74,7 @@ export const HomeModal = ({open,setOpen}) => {
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'https://6df1-2603-300a-21e3-0-d131-6e3f-46f3-578f.ngrok-free.app/api/model',
+        url: 'https://4bbc-96-74-130-169.ngrok-free.app/api/model',
         headers: { 
           'Content-Type': 'application/json'
         },
@@ -80,9 +84,10 @@ export const HomeModal = ({open,setOpen}) => {
       axios.request(config)
       .then((response) => {
         setData(response.data?.data)
-        console.log(response.data?.data?.calorie);
-        console.log(response.data?.data?.itemName);
-        alert(response.data?.data?.calorie )
+        setOpen2(true)
+        // console.log(response.data?.data?.calorie);
+        // console.log(response.data?.data?.itemName);
+        // alert(response.data?.data?.calorie )
       })
       .catch((error) => {
         console.log(error);
@@ -94,6 +99,7 @@ export const HomeModal = ({open,setOpen}) => {
 }
 console.log(data)
   return (
+    <>
     <Modal isVisible={open} onBackdropPress={()=>{setOpen(false)}} 
     //  onSwipeComplete={() => setOpen(false)}
     //  swipeDirection="top"
@@ -108,8 +114,8 @@ console.log(data)
             }}
             style={{ width: 100, height: 100,borderRadius:8}}
           />
-          <TouchableOpacity  style={styles.modalbtn}  onPress={uploadImage}>
-          <Text style={styles.modalbtnText}>Find Calories<Feather name='camera' color='#fff' size={20}/></Text>
+          <TouchableOpacity  style={styles.modalbtn}  onPress={()=>{uploadImage()}}>
+          <Text style={styles.modalbtnText}>Find Calories {''} <Feather name='camera' color='#fff' size={20}/></Text>
         </TouchableOpacity>
        
         <TouchableOpacity onPress={()=>{setPhoto('')}} style={styles.modalbtn}>
@@ -129,6 +135,39 @@ console.log(data)
 }
       </View>
     </Modal>
+    <Modal isVisible={open1} onBackdropPress={() => { setOpen(false) }} style={styles.modelStyle1}>
+                <View style={styles.modelContainer1}>
+
+                    <View style={{ alignItems: 'center' }}>
+                        <Image
+                            source={{
+                                uri: photo?.uri
+                            }}
+                            style={{ width: 100, height: 100, borderRadius: 8 }}
+                        />
+                    </View>
+                    <View style={{ marginLeft: 30, marginRight: 30 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text style={styles.itemKey}>Name</Text>
+                            <Text style={styles.itemName}>{data?.itemName}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text style={styles.itemKey}>Calories</Text>
+                            <Text style={styles.itemName}>{data?.calorie}</Text>
+                        </View>
+                    </View>
+
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginBottom: 20 }}>
+                        <TouchableOpacity style={styles.cancelbtn} onPress={() => { setOpen2(false) }}>
+                            <Text style={styles.cancelbtnText}>Cancel</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.addbtn}>
+                            <Text style={styles.addbtnText}>Add To Diet</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+    </Modal>
+    </>
 
   )
 }
@@ -161,4 +200,60 @@ const styles=StyleSheet.create({
         fontWeight:'bold',
         color: '#fff',
       },
+      modelStyle1: {
+        justifyContent: 'center',
+        margin: 30,
+    },
+    modelContainer1: {
+        backgroundColor: '#fff',
+        height: 290,
+        borderRadius: 20,
+        justifyContent: 'space-around',
+        // alignItems:'center'
+    },
+    addbtn: {
+        paddingHorizontal: 20,
+        padding: 10,
+        marginHorizontal: 10,
+        backgroundColor: '#01714b',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 6,
+        marginTop: 10,
+        elevation: 5,
+    },
+    addbtnText: {
+        textAlign: 'center',
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: '#fff',
+    },
+    cancelbtn: {
+        padding: 10,
+        paddingHorizontal: 20,
+        marginHorizontal: 10,
+        backgroundColor: '#e6f1ed',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 6,
+        marginTop: 10,
+        elevation: 3,
+    },
+    cancelbtnText: {
+        textAlign: 'center',
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: '#01714b',
+    },
+    itemKey: {
+        marginTop: 1,
+        color: 'grey',
+        fontWeight: 'bold',
+        paddingBottom: 10,
+    },
+    itemName: {
+        marginTop: 1,
+        color: '#01714b',
+        fontWeight: 'bold'
+    }
 })

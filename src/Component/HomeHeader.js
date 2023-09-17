@@ -2,16 +2,19 @@ import * as React from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 
-export default function HomeHeader({ navigation,name,icon }) {
+export default function HomeHeader({ navigation,name,icon,editIcon }) {
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                    <TouchableOpacity onPress={() => navigation.openDrawer()}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                  <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
+                  <TouchableOpacity onPress={() => navigation.openDrawer()}>
                         {icon}   
                 </TouchableOpacity>
-                    <Text style={styles.name}>{name}</Text>
+                <Text style={styles.name}>{name}</Text>
+                  </View>
+                  {editIcon}
                 </View>
             </View>
         </View>
@@ -24,8 +27,7 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
     },
     header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+       
         backgroundColor: "#01714b",
         paddingTop: 5,
         paddingBottom:5,
@@ -44,6 +46,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#fff',
         marginLeft: 20,
-        // fontWeight: 500,
+        fontWeight:'bold',
     }
 });

@@ -7,26 +7,31 @@ import {
   ScrollView,
   TouchableOpacity,Dimensions
 } from "react-native";
+import * as yup from 'yup'
+import { Formik } from 'formik'
 import { InputField, Button } from "./Register";
-
 import { useState } from "react";
 import { login } from "../Config/Firebase";
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
+const loginValidationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Please enter valid email")
+    .required('Email Address is Required'),
+  password: yup
+    .string()
+    .min(8, ({ min }) => `Password must be at least ${min} characters`)
+    .required('Password is required'),
+})
+
 export default function Login({ navigation }) {
-  const [loginUser, SetLoginUser] = useState({});
   const [loading, setLoading] = useState(false);
 console.log(navigation)
 
-  function createUser(e, key) {
-    SetLoginUser({
-      ...loginUser,
-      [key]: e,
-    });
-  }
-  async function SignIn() {
-    // console.log("click hoa");
+  async function SignIn(value) {
+    console.log("user-------->>>>",value);
     // try {
     //   setLoading(true);
     //     // const result = await login(loginUser);
@@ -45,6 +50,21 @@ console.log(navigation)
       {/* <ScrollView s/howsVerticalScrollIndicator={false}> */}
 
         <Text style={styles.heading}>LOGIN</Text>
+
+        <Formik
+   validationSchema={loginValidationSchema}
+   initialValues={{ email: '', password: '' }}
+   onSubmit={values => SignIn(values)}
+ >
+   {({
+     handleChange,
+     handleBlur,
+     handleSubmit,
+     values,
+     errors,
+     isValid,
+   }) => (
+     <>
         <View>
 
         <InputField
@@ -52,23 +72,39 @@ console.log(navigation)
           textContentType="emailAddress"
           placeholder="Enter Your Email"
           placeholderTextColor="grey"
-          onChangeText={(e) => createUser(e, "email")}
+          onChangeText={handleChange('email')}
+          name='email'
+          value={values.email}
         />
+        {errors.email &&
+         <Text style={styles.error}>{errors.email}</Text>
+       }
         </View>
 
-        <InputField
+       <View>
+
+       <InputField
           secureTextEntry={true}
+          name="password"
           keyboardType="password"
           textContentType="password"
           placeholder="Enter Your Password"
           placeholderTextColor="grey"
-          onChangeText={(e) => createUser(e, "password")}
-        />
+          onChangeText={handleChange('password')}
+          value={values.password}
+          />
+        {errors.password &&
+         <Text style={styles.error}>{errors.password}</Text>
+       }
+       </View>
 
         <TouchableOpacity style={styles.Btn} activeOpacity={0.5}
-        onPress={SignIn}>
+        onPress={handleSubmit}>
             <Text style={styles.btntext}>LOG IN</Text>
         </TouchableOpacity>
+        </>
+   )}
+ </Formik>
      
         <View style={styles.auth}>
         <TouchableOpacity 
@@ -160,5 +196,12 @@ const styles = StyleSheet.create({
     // alignSelf:'center',
     fontWeight:"bold",
     
+  },
+  error:{
+    fontSize:11,
+    color:'red',
+    alignSelf:'flex-start',
+    marginBottom:8,
+    marginLeft:6,
   }
 });

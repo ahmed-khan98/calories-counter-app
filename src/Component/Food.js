@@ -24,11 +24,11 @@ export default function Foods({handleOpen,navigation}){
               name="Dinner"
               img="https://cdn.vox-cdn.com/thumbor/bMDwxq8pYW4fuLHBGhcVKTl9PX8=/0x0:5700x3800/1200x800/filters:focal(2394x1444:3306x2356)/cdn.vox-cdn.com/uploads/chorus_image/image/65460644/GettyImages_1032865588.0.jpg"
             />
-            <Foodtime
+            {/* <Foodtime
               navigation={navigation}
               name="Water"
               img="https://media.gettyimages.com/photos/drinking-glass-of-water-picture-id484782395?s=612x612"
-            />
+            /> */}
 
           </View>
     )
