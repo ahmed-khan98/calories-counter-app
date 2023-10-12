@@ -1,13 +1,16 @@
-import * as React from 'react';
-import { useState } from 'react';
+
 import {
   StyleSheet, StatusBar, Text, View,
-  TouchableOpacity, TextInput, Image, ScrollView,
-  SafeAreaView, Alert, KeyboardAvoidingView, Dimensions
+  TouchableOpacity, TextInput, ScrollView,
+  KeyboardAvoidingView, Dimensions
 } from 'react-native';
 import * as yup from 'yup'
 import { Formik } from 'formik'
-// import { Register } from "../Config/Firebase";
+import {ActivityIndicator} from 'react-native-paper';
+
+import React, {useContext, useState} from 'react';
+import {AuthAction} from '../Context/AuthContext';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -26,34 +29,15 @@ const SignUpValidationSchema = yup.object().shape({
 
 export default function Register({ navigation }) {
   const [loading, setLoading] = useState(false)
+  const {onSignUp} = useContext(AuthAction);
 
 
-  async function SignUp(value) {
+  function handleSubmit(value) {
+    setLoading(true)
     console.log('user---->>', value)
-    navigation.navigate("Login")
-    // try {
-    //   setLoading(true)
-    // //  const result = await SignUp(user)
-    //   alert('user SignUp successfully')
-    //   setLoading(false)
-    //   navigation.navigate("Login")
-    // }
-    // catch (e) {
-    //   alert(e)
-    //   setLoading(false)
-    // }
+    onSignUp(value,navigation)   
   }
 
-  if (loading) {
-    return (
-      <View style={styles.loading}>
-        <Image style={{ width: 300, height: 300 }}
-          source={{
-            uri: 'https://media0.giphy.com/media/MXipXbZAykM5eTbhez/200w.gif?cid=82a1493b4eioocgl2pl9mc16kfw9fk1z9bk2970hwwdhlhxd&rid=200w.gif&ct=g'
-          }} />
-      </View>
-    )
-  }
   return (
     <KeyboardAvoidingView style={styles.container}>
       <StatusBar style="light" />
@@ -69,7 +53,7 @@ export default function Register({ navigation }) {
             <Formik
               validationSchema={SignUpValidationSchema}
               initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
-              onSubmit={values => SignUp(values)}
+              onSubmit={values => handleSubmit(values)}
             >
               {({
                 handleChange,
@@ -142,9 +126,9 @@ export default function Register({ navigation }) {
 
                   <TouchableOpacity style={styles.Btn}
                     onPress={handleSubmit}>
-                    {loading ?
-                      <img src='https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator.gif' width='30' height='20' />
-                      : <Text style={styles.btntext}>SIGN UP</Text>}
+                    <Text style={styles.btntext}> {loading ? (
+                      <ActivityIndicator animating={true} color="#fff" />
+                    ) : 'SIGN UP'}</Text>
                   </TouchableOpacity>
 
 

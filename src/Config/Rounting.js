@@ -10,6 +10,7 @@ import CameraScreen from '../Screen/Camera'
 import CustomDrawer from "../Component/CustomerDrawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import Splash from "../Screen/Splash";
 // import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Stack = createStackNavigator();
@@ -26,11 +27,12 @@ export default function Rounting() {
 
 function MyStack() {
   return (
-    <Stack.Navigator initialRouteName='Login'>
-      <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-      <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
-      <Stack.Screen name="Login" component={SignIn} options={{ headerShown: false }}/>
-      <Stack.Screen name="Registration" component={Registration} options={{ headerShown: false }} />
+    <Stack.Navigator initialRouteName='Splash'>
+    <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
+    <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
+    <Stack.Screen name="Login" component={SignIn} options={{ headerShown: false }}/>
+    <Stack.Screen name="Registration" component={Registration} options={{ headerShown: false }} />
+    <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
       {/* <Stack.Screen name="Camera" component={CustomCamera} options={{ headerShown: false }} /> */}
 
     </Stack.Navigator>

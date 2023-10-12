@@ -1,20 +1,39 @@
 import { View, Text,TextInput, StyleSheet, ScrollView ,TouchableOpacity,Dimensions} from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from "react-native-vector-icons/Feather";
-import React, { useState } from "react";
 import Modal from "react-native-modal";
 import HomeHeader from '../Component/HomeHeader';
 import Comment from '../Component/Comment';
+import React, {useContext, useState,useEffect} from 'react';
+import {AuthAction,AuthContext} from '../Context/AuthContext';
 const windowWidth = Dimensions.get('window').width;
 
 
 export default function Feedback({ navigation }) {
 
   const [open, setOpen] = useState(false)
-  const handleSubmit = (e) => {
-    console.log(e)
-    setOpen(true)
+  const [message, setMessage] = useState('')
+  const {addFeedback,getFeedback} = useContext(AuthAction);
+  const {feedbacks} = useContext(AuthContext);
+
+  const handleInputChange = (text) => {
+    setMessage(text);
+  };
+ 
+  const handleSubmit=()=>{
+    if(message){
+      setOpen(false)
+      addFeedback(message)
+       setMessage('')
+    }
+    else{
+      alert('plz enter feedback first')
+    }
   }
+
+  useEffect(()=>{
+    getFeedback()
+  },[])
 
   return (
     <ScrollView shhowsVerticalScrollIndicator={false}>
@@ -24,28 +43,32 @@ export default function Feedback({ navigation }) {
           name='Feedback'
           icon={<Icon name="arrow-back" size={26} color="#fff" />}
           editIcon={
-            <TouchableOpacity onPress={()=>handleSubmit()}>
-              <Feather name="edit" size={26} color="#fff" />
+            <TouchableOpacity onPress={()=>setOpen(true)}>
+              <Feather name="edit" size={22} color="#fff" />
             </TouchableOpacity>}
         />
-
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
+    
+    
+      {feedbacks?.map((e,i)=><Comment {...e} key={i}/>)}
+        
       </View>
-      <Modal isVisible={open} onBackdropPress={() => { setOpen(false) }} style={styles.modelStyle} animationIn='fancy'>
+      <Modal isVisible={open} 
+      onBackdropPress={() => {
+        setOpen(false);
+      }} 
+      style={styles.modelStyle} 
+      >
         <View style={styles.modelContainer}>
 
         <TextInput
+        value={message}
+        onChangeText={handleInputChange}
         style={styles.input}
         multiline={true}
+        numberOfLines={5}
         placeholder='enter your feedback here'
       />
-          <TouchableOpacity style={styles.addbtn} onPress={()=>setOpen(false)}>
+          <TouchableOpacity style={styles.addbtn} onPress={()=>{handleSubmit()}}>
             <Text style={styles.addbtnText}>Submit</Text>
           </TouchableOpacity>
 
@@ -72,13 +95,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   input: {
-    height: 150,
     paddingLeft:10,
     borderRadius:10,
-    // paddingTop:20,
     fontSize:18,
     backgroundColor: '#e6f1ed',
-    color:'#8e8e8e'
+    color:'grey',
+    textAlignVertical: 'top'
   },
   addbtn: {
     paddingHorizontal: 20,

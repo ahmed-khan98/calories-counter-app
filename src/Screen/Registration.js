@@ -1,20 +1,19 @@
-import * as React from "react";
 import {
   StyleSheet,
   Text,
   View,
-  SafeAreaView,
-  StatusBar,
   ScrollView,
   TouchableOpacity,
-  KeyboardAvoidingView,
   Dimensions
 } from "react-native";
+import { Button, Dialog, Portal } from 'react-native-paper';
 import { InputField } from "./Register";
-import { useState } from "react";
 import DropDownPicker from 'react-native-dropdown-picker';
-import * as yup from 'yup'
-import { Formik } from 'formik'
+import * as yup from 'yup';
+import { Formik } from 'formik';
+import React, {useContext, useState} from 'react';
+import {AuthAction} from '../Context/AuthContext';
+
 const windowWidth = Dimensions.get('window').width;
 
 const RegistrationValidationSchema = yup.object().shape({
@@ -30,6 +29,16 @@ const RegistrationValidationSchema = yup.object().shape({
 
 export default function Registration({ navigation }) {
 
+  const {adduserInfo} = useContext(AuthAction);
+  const [visible, setVisible] = useState(false);
+  const [data, setData] = useState(null);
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => {
+    adduserInfo(data,calories,navigation)
+    setVisible(false)
+  }
+
+  const [calories, setCalories] = useState(null);
   const [open, setOpen] = useState(false);
   const [openGender, setOpenGender] = useState(false);
   const [openGoal, setOpenGoal] = useState(false);
@@ -46,22 +55,36 @@ export default function Registration({ navigation }) {
   const goallist = [
     { label: 'Gain Weight', value: 'gain' },
     { label: 'Lose Weight', value: 'lose' }
-  ]
+  ];
   const genderlist = [
     { label: 'Male', value: 'male' },
     { label: 'Female', value: 'female' }
-  ]
+  ];
 
   function handleCalories(value) {
-    console.log(value)
-    const { activity, gender, goal, age, currentWeight, kgToGainLose, height, months } = value;
+    setData(value)
+    console.log(value);
+    const {
+      activity,
+      gender,
+      goal,
+      age,
+      currentWeight,
+      kgToGainLose,
+      height,
+      months,
+    } = value;
 
     let bmr;
-    if (parseFloat(currentWeight) < 40 && goal === 'lose') {
+    if (parseFloat(currentWeight) <= 40 && goal === 'lose') {
       alert('Your weight is too low. Consult a healthcare professional.');
       return;
     }
-    if (gender === 'male') {
+    else if(parseFloat(currentWeight) >= 120 && goal === 'gain') {
+      alert('Your weight is too high. Consult a healthcare professional.');
+      return;
+    }
+    else if (gender === 'male') {
       bmr = 88.362 + 13.397 * currentWeight + 4.799 * height - 5.677 * age;
     } else {
       bmr = 447.593 + 9.247 * currentWeight + 3.098 * height - 4.33 * age;
@@ -72,10 +95,8 @@ export default function Registration({ navigation }) {
     const goalMultiplier = goal === 'lose' ? -1 : 1;
     const totalGoalCalories = goalMultiplier * 3500 * months;
     const adjustedDailyCalories = dailyCalories + Math.round(totalGoalCalories / (months * 30));
-
-    alert(`Your Per day daily calories required is ${adjustedDailyCalories}`);
-    // navigation.navigate('Home');
-
+    setCalories(adjustedDailyCalories)
+    showDialog()
   }
 
   return (
@@ -106,19 +127,16 @@ export default function Registration({ navigation }) {
           <View style={styles.container}>
             {/* <KeyboardAvoidingView> */}
             <Text style={styles.topheading}>Set up Your profile</Text>
-           <View>
+            <View>
            <DropDownPicker
               open={open}
               items={Activitylist}
               setOpen={() => setOpen(!open)}
               value={activity}
-              setValue={(selectedValue) => {
-                console.log(selectedValue,'select value of activity')
-                setFieldValue('activity', selectedValue);
-                setActivity(selectedValue);
+              setValue={(e,) => {
+              setFieldValue('activity', e());
+              setActivity(e());
               }}
-              onChangeText={handleChange('activity')}
-
               placeholder="Select Your Activity Level"
               disableBorderRadius={false}
               style={{ borderColor: '#01714b' }}
@@ -135,10 +153,10 @@ export default function Registration({ navigation }) {
               items={genderlist}
               setOpen={() => setOpenGender(!openGender)}
               value={gender}
-              setValue={(e) => {
-                setFieldValue('gender', e);
-                setGender(e);
-              }}
+                setValue={(e,) => {
+                  setFieldValue('gender', e());
+                  setGender(e());
+                }}
               placeholder="Select Your Gender"
               disableBorderRadius={false}
               style={{ borderColor: '#01714b' }}
@@ -155,9 +173,9 @@ export default function Registration({ navigation }) {
               items={goallist}
               setOpen={() => setOpenGoal(!openGoal)}
               value={goal}
-              setValue={(e) => {
-                setFieldValue('goal', e);
-                setGoal(e);
+              setValue={(e,) => {
+                setFieldValue('goal', e());
+                setGoal(e());
               }}
               placeholder="Select Your Goal"
               disableBorderRadius={false}
@@ -255,6 +273,19 @@ export default function Registration({ navigation }) {
           </View>
         )}
       </Formik>
+      <View>
+        <Portal>
+          <Dialog visible={visible} onDismiss={hideDialog} style={{backgroundColor:'white',color:'#555'}}>
+            <Dialog.Title>Calculated Calories</Dialog.Title>
+            <Dialog.Content>
+              <Text variant="bodyMedium" style={{color:'#555'}}>{`Your Per day daily calories required is ${calories}`}</Text>
+            </Dialog.Content>
+            <Dialog.Actions>
+              <Button onPress={hideDialog} style={{color:'#01714b'}}>Done</Button>
+            </Dialog.Actions>
+          </Dialog>
+        </Portal>
+      </View>
     </ScrollView>
   );
 }

@@ -1,23 +1,22 @@
-import { View, Text,StyleSheet,Image } from 'react-native'
 import React from 'react'
-export default function (){
+import { View, Text,StyleSheet,Image } from 'react-native';
+export default function DietDish({name,image,calories,qty,createdAt}){
   return (
     <View style={styles.body}>
   <View style={{flexDirection:'row'}}>
   <Image
    style={styles.img}
-   source={{ uri: 'https://img.freepik.com/premium-photo/cold-coffee-generated-by-ai_793210-2075.jpg?w=740' }}
+   source={{ uri: image }}
  />
   
    <View style={styles.dishInfo}>
-   <Text style={styles.dishname}>Black Cold Coffee</Text>
-   <Text style={styles.quantity}>1 cup </Text>
+   <Text style={styles.dishname}>{name}</Text>
+   <Text style={styles.quantity}>{qty}</Text>
    </View>
   </View>
    <View style={{justifyContent:'space-between'}}>
-   <Text style={styles.dishcaloires}>109</Text>
-   <Text style={styles.dishtime}>3:13 pm</Text>
-   <Text style={styles.dishtime}>20/12/2023</Text>
+   <Text style={styles.dishcaloires}>{calories}</Text>
+   <Text style={styles.dishtime}>{createdAt}</Text>
    </View>
      </View>    
   );
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
         marginHorizontal:6,
         marginTop:5,
         marginBottom:2,
-        // elevation: 1,
+        elevation: 2,
       },
       img: {
         borderRadius: 3,

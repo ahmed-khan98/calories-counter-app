@@ -1,16 +1,27 @@
-import * as React from 'react'
+//1182540-0336
 import Icon from 'react-native-vector-icons/Ionicons';
 import { StyleSheet,Dimensions,View,Text,  } from "react-native";
+import React, {useContext, useEffect, useState} from 'react';
+import {AuthAction, AuthContext} from '../Context/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const windowWidth = Dimensions.get('window').width;
 
 export const UserCalories = () => {
+
+  const {userInfo} = useContext(AuthContext);
+  const {getTodayCalories} = useContext(AuthAction);
+
+  console.log(userInfo,'setuserInfo state in context------->>>>in calories page>')
+
+
+
   return (
     <View style={styles.calories}>
     <Icon name="stats-chart-outline" style={styles.menuIcon} size={80} color="#01714b" />
     <View style={styles.container}>
     <View style={styles.caloriesInfo}>
       <Text style={styles.caloriesHeading}>Calories Required</Text>
-      <Text style={styles.caloriesQty}> 2500</Text>
+      <Text style={styles.caloriesQty}>{userInfo?.perDayCalories}</Text>
     </View>
     <View style={styles.caloriesInfo}>
       <Text style={styles.caloriesHeading}>Calories Consume</Text>
@@ -55,8 +66,9 @@ const styles=StyleSheet.create({
 
       },
       caloriesQty: {
-        paddingLeft: 10,
+        paddingLeft: 20,
         fontWeight: 'bold',
-        color:'#01714b'
+        color:'#01714b',
+        alignSelf:'flex-end'
       },
 })

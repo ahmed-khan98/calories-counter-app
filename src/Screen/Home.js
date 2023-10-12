@@ -1,4 +1,3 @@
-import React,{ useState } from "react";
 import Icon from 'react-native-vector-icons/Ionicons';
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, StatusBar,TouchableOpacity ,Image, Dimensions } from "react-native";
 import HomeHeader from "../Component/HomeHeader";
@@ -7,14 +6,35 @@ import Foods from "../Component/Food";
 import Dishes from "../Component/Dishes";
 import { UserCalories } from "../Component/UserCalories";
 import { HomeModal } from "../Component/HomeModal";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, {useContext,useState,useEffect} from 'react';
+import {AuthAction,AuthContext} from '../Context/AuthContext';
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 export default function Home({ navigation }) {
   const [open,setOpen]=useState(false)
+  const {getUserInfo,getCalories} = useContext(AuthAction);
+  const {user} = useContext(AuthContext);
+console.log('user stae in context-------------->>>',user)
+
   const handleOpen=()=>{
     setOpen(true)
   }
+  
+  useEffect(() => {
+    registerSplash();
+    
+  },[]);
+
+  const registerSplash = async () => {
+    const getUser = await AsyncStorage.getItem('User');
+
+
+      if (getUser === null) {
+        navigation.navigate('Login');
+      }
+  };
+
   return (
     <ScrollView>
       <View style={styles.container}>

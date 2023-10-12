@@ -20,20 +20,20 @@ export default function Dishes(){
             <View style={styles.breakfastList}>
             <Text style={styles.routineName} showsHorizontalScrollIndicator={false}>Break Fast</Text>
             <ScrollView horizontal={true} style={styles.dishes}>
-            {Breakfast?.map(e=><Dish {...e}/>)}
+            {Breakfast?.map((e,i)=><Dish {...e} key={i}/>)}
               
             </ScrollView>
           </View>
           <View style={styles.breakfastList}>
             <Text style={styles.routineName} showsHorizontalScrollIndicator={false}>Lunch</Text>
             <ScrollView horizontal={true} style={styles.dishes}>
-            {Lunch?.map(e=><Dish {...e}/>)}
+            {Lunch?.map((e,i)=><Dish {...e} key={i}/>)}
             </ScrollView>
           </View>
           <View style={styles.breakfastList}>
             <Text style={styles.routineName} showsHorizontalScrollIndicator={false}>Dinner</Text>
             <ScrollView horizontal={true} style={styles.dishes}>
-            {Dinner?.map(e=><Dish {...e}/>)}
+            {Dinner?.map((e,i)=><Dish {...e} key={i}/>)}
             </ScrollView>
           </View>
         </View>

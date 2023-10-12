@@ -1,31 +1,40 @@
-import React, { useState } from "react";
+/* eslint-disable quotes */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable prettier/prettier */
 import Modal from "react-native-modal";
-import Feather from "react-native-vector-icons/Feather";
-import Fontisto from "react-native-vector-icons/Fontisto";
 import { StyleSheet, Dimensions, View, Text, Image, TouchableOpacity } from "react-native";
+import React, {useContext, useState} from 'react';
+import {AuthAction} from '../Context/AuthContext';
+import Rounting from "../Config/Rounting";
 
 const windowWidth = Dimensions.get('window').width;
 
-export default function Dish({ name, calories, quantity, image }) {
+export default function Dish({ itemName, calorie, image,weight }) {
     const [open, setOpen] = useState(false)
-    const [data, setData] = useState(false)
-    const handleSubmit = (e) => {
-        console.log(e)
+    const {addCalories} = useContext(AuthAction);
+
+    const [data, setData] = useState(null)
+    const handleView = (e) => {
         setData(e)
         setOpen(true)
     }
+     function handleSubmit() {
+        console.log('chalah')
+         addCalories(data)   
+         setOpen(false)
+      }
     return (
         <>
-            <TouchableOpacity activeOpacity={0.5} onPress={() => handleSubmit({ name, calories, image })}>
+            <TouchableOpacity activeOpacity={0.5} onPress={() => handleView({ itemName, calorie, image,weight })}>
                 <View style={styles.container}>
                     <Image
                         style={styles.img}
                         resizeMode="cover"
                         source={{ uri: image }}
                     />
-                    <Text style={styles.dishname}>{name}</Text>
-                    <Text style={styles.quantity}>{quantity}</Text>
-                    <Text style={styles.dishcaloires}>{calories}</Text>
+                    <Text style={styles.dishname}>{itemName}</Text>
+                    <Text style={styles.quantity}>{weight}</Text>
+                    <Text style={styles.dishcaloires}>{calorie}</Text>
                 </View>
             </TouchableOpacity>
             <Modal isVisible={open} onBackdropPress={() => { setOpen(false) }} style={styles.modelStyle}>
@@ -34,7 +43,7 @@ export default function Dish({ name, calories, quantity, image }) {
                     <View style={{ alignItems: 'center' }}>
                         <Image
                             source={{
-                                uri: data?.image
+                                uri: data?.image,
                             }}
                             style={{ width: 100, height: 100, borderRadius: 8 }}
                         />
@@ -42,11 +51,15 @@ export default function Dish({ name, calories, quantity, image }) {
                     <View style={{ marginLeft: 30, marginRight: 30 }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text style={styles.itemKey}>Name</Text>
-                            <Text style={styles.itemName}>{data?.name}</Text>
+                            <Text style={styles.itemName}>{data?.itemName}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text style={styles.itemKey}>Calories</Text>
-                            <Text style={styles.itemName}>{data?.calories}</Text>
+                            <Text style={styles.itemName}>{data?.calorie}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text style={styles.itemKey}>Quantity</Text>
+                            <Text style={styles.itemName}>{data?.weight}</Text>
                         </View>
                     </View>
 
@@ -54,7 +67,7 @@ export default function Dish({ name, calories, quantity, image }) {
                         <TouchableOpacity style={styles.cancelbtn} onPress={() => { setOpen(false) }}>
                             <Text style={styles.cancelbtnText}>Cancel</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.addbtn}>
+                        <TouchableOpacity style={styles.addbtn} onPress={handleSubmit}>
                             <Text style={styles.addbtnText}>Add To Diet</Text>
                         </TouchableOpacity>
                     </View>
@@ -154,6 +167,6 @@ const styles = StyleSheet.create({
     itemName: {
         marginTop: 1,
         color: '#01714b',
-        fontWeight: 'bold'
-    }
-})
+        fontWeight: 'bold',
+    },
+});

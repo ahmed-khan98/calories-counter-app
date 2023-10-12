@@ -1,6 +1,6 @@
 import { View, Text,StyleSheet,Image } from 'react-native'
 import React from 'react'
-export default function Comment(){
+export default function Comment({firstname,lastname,message}){
   return (
     <View style={styles.body}>
    <Image
@@ -9,8 +9,8 @@ export default function Comment(){
  />
   
    <View style={styles.userInfo}>
-   <Text style={styles.name}>Ahmed khan</Text>
-   <Text style={styles.message}>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's s tandard dummy ext of the printing and typesetting industry. Lorem Ipsum has been the industry's s tandard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen b text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</Text>
+   <Text style={styles.name}>{`${firstname} ${lastname}`}</Text>
+   <Text style={styles.messages}>{message}</Text>
    </View>
      </View>
   );
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         marginLeft:5,
         width:'85%'
       },
-      message: {
+      messages: {
         fontSize: 13,
         color: '#555',
       },

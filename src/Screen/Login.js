@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   StyleSheet,
   Text,
@@ -9,9 +8,13 @@ import {
 } from "react-native";
 import * as yup from 'yup'
 import { Formik } from 'formik'
-import { InputField, Button } from "./Register";
-import { useState } from "react";
-import { login } from "../Config/Firebase";
+import {ActivityIndicator} from 'react-native-paper';
+import { InputField } from "./Register";
+import React, {useContext, useState, useEffect} from 'react';
+import {AuthAction} from '../Context/AuthContext';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -27,23 +30,26 @@ const loginValidationSchema = yup.object().shape({
 })
 
 export default function Login({ navigation }) {
-  const [loading, setLoading] = useState(false);
-console.log(navigation)
 
-  async function SignIn(value) {
-    console.log("user-------->>>>",value);
-    // try {
-    //   setLoading(true);
-    //     // const result = await login(loginUser);
-    //   alert("user login successfully");
-    //   setLoading(false);
-      navigation.navigate("Registration");
-    // } catch (e) {
-    //   alert(e);
-    //   setLoading(false);
-    // }
+  const {onSignIn} = useContext(AuthAction);
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(value) {
+    setLoading(true)
+    onSignIn(value.email, value.password, navigation);
+    setLoading(false)
   }
- 
+
+  useEffect(() => {
+    registerSplash();
+  });
+
+  const registerSplash = async () => {
+    const getUser = await AsyncStorage.getItem('User');
+      if (getUser !== null) {
+        navigation.navigate('Home');
+      }
+  };
 
   return (
     <View style={styles.container}>
@@ -54,7 +60,7 @@ console.log(navigation)
         <Formik
    validationSchema={loginValidationSchema}
    initialValues={{ email: '', password: '' }}
-   onSubmit={values => SignIn(values)}
+   onSubmit={values => handleSubmit(values)}
  >
    {({
      handleChange,
@@ -100,7 +106,9 @@ console.log(navigation)
 
         <TouchableOpacity style={styles.Btn} activeOpacity={0.5}
         onPress={handleSubmit}>
-            <Text style={styles.btntext}>LOG IN</Text>
+            <Text style={styles.btntext}> {loading ? (
+              <ActivityIndicator animating={true} color="#fff" />
+            ) : 'LOG IN'}</Text>
         </TouchableOpacity>
         </>
    )}
